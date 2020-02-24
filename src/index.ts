@@ -114,10 +114,6 @@ function checkFileInDirectory(directory: string){
     }
     
     for(let filename of files){
-        /* INFO: 로그 시스템 파일은 continue */
-        if(filename === 'log_system.h'){
-            continue;
-        }
         /* INFO: 전체파일 경로 */
         let filepath = path.join(directory, filename);
         /* INFO: 현재 목록이 파일인지 검사 */
@@ -127,7 +123,9 @@ function checkFileInDirectory(directory: string){
         if(isFile){
             console.log(`${filename}`);
             /* INFO: 검사할 파일이 아니면 continue */
-            if(filename.indexOf('.cpp') === -1 && filename.indexOf('.h') === -1 && filename.indexOf('.cc') === -1) continue;
+            if(filename.indexOf('.cpp') === -1 &&
+             filename.indexOf('.h') === -1 &&
+              filename.indexOf('.cc') === -1) continue;
             
             let filedata = fs.readFileSync(filepath).toString('utf8');
             checkInnoLogValid(filedata);
